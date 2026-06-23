@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Trello Clone",
-  description: "A modern project management tool inspired by Trello",
+  title: "Taskora - Project Management Platform",
+  description: "Taskora - A modern project management platform",
 };
 
 export default function RootLayout({
