@@ -8,7 +8,7 @@ export default function Login() {
       <AuthForm
         mode="sign-in"
         title="Sign in to your account"
-        subtitle="Welcome back to Trello Clone"
+        subtitle="Welcome back to Taskora"
         redirectUrl="/dashboard"
         alternateUrl="/sign-up"
       />
