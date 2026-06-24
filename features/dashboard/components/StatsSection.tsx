@@ -3,7 +3,7 @@
 import { StatsSkeleton } from "@/components/skeletons/Stats";
 import { Card, CardContent } from "@/components/ui/card";
 import { Board } from "@/lib/supabase/models";
-import { ChartLine, Rocket, Taskora } from "lucide-react";
+import { ChartLine, Rocket, Trello } from "lucide-react";
 
 interface StatsSectionProps {
   boards: Board[];

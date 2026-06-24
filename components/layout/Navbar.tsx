@@ -6,7 +6,7 @@ import {
   ArrowRight,
   Filter,
   MoreHorizontal,
-  Taskora,
+  Trello,
 } from "lucide-react";
 import React from "react";
 import { Button } from "../ui/button";
