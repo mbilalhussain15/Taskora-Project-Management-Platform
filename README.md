@@ -1,133 +1,187 @@
-# Trello Clone - Next.js
+# 🗂️ Taskora — Project Management Platform
 
-A modern project management tool inspired by Trello, built with Next.js, Supabase, and Clerk. This full-stack application provides a comprehensive board experience with drag-and-drop functionality, real-time collaboration, and subscription-based features.
+A full-stack SaaS project management platform built with **Next.js 15**, **Supabase**, and **Clerk** — featuring Kanban boards with drag-and-drop, real-time task management, sprint analytics, and subscription-based access control.
 
-## Demo
+🔗 **Live Demo:** [mbilalhussain-taskora-pmp.vercel.app](https://mbilalhussain-taskora-pmp.vercel.app)
 
-- Live Preview: https://trello-clone-by-shan.vercel.app
+---
 
-## Features
+## ✨ Features
 
-### Core Functionality
-- **Kanban Board Management**: Create, edit, and organize boards with customizable colors and titles
-- **Drag & Drop Interface**: Intuitive task management with smooth drag-and-drop using @dnd-kit
-- **Column Management**: Create, edit, and delete columns to organize your workflow
-- **Task Management**: Add tasks with titles, descriptions, assignees, priorities, and due dates
-- **Real-time Updates**: Live synchronization of board changes across sessions
+- 🗃️ **Kanban Boards** — create and manage boards with customizable colors and titles
+- 🖱️ **Drag & Drop** — intuitive task management powered by `@dnd-kit`
+- 📋 **Column Management** — create, edit, and delete workflow columns
+- ✅ **Task Management** — add tasks with titles, descriptions, assignees, priorities, and due dates
+- 📊 **Analytics Dashboard** — board statistics, task timeline, and activity overview
+- 🔍 **Advanced Filtering** — filter tasks by priority, assignee, and due dates
+- 🔐 **Authentication** — secure sign-in/sign-up via **Clerk**
+- 🛡️ **Row Level Security** — database-level data isolation via Supabase RLS
+- 💳 **Subscription Plans** — free and premium tiers with upgrade flow
+- 🌙 **Dark / Light Mode** — theme switching
+- 📱 **Responsive Design** — works across desktop and mobile
 
-### Security & Data Protection
-- **Row Level Security (RLS)**: Database-level security ensuring users can only access their own data
-- **User Isolation**: Complete data separation between different user accounts
+---
 
-### User Experience
-- **Modern Authentication**: Secure sign-in/sign-up with Clerk integration
-- **Responsive Design**: Beautiful UI built with Tailwind CSS and Shadcn UI components
-- **Dashboard Overview**: Centralized view of all your boards with statistics
-- **Advanced Filtering**: Filter tasks by priority, assignee, and due dates
-- **Search Functionality**: Quick search across boards and tasks
+## 🏗️ Architecture
 
-### Subscription Features
-- **Free Tier**: Limited to 1 board for free users
-- **Premium Plans**: Unlimited boards and advanced features via Clerk's pricing integration
-- **Upgrade Prompts**: Seamless upgrade flow for free users
-
-### Technical Features
-- **TypeScript**: Full type safety throughout the application
-- **Server-Side Rendering**: Optimized performance with Next.js 15
-- **Database Integration**: Supabase for real-time data management
-- **Component Architecture**: Modular, reusable components with feature-based organization
-
-## Screenshots
-
-![Home](https://i.ibb.co/b5HDBpvn/trello-clone-home.png)
-- Modern landing page with feature highlights
-
-![Sign Up](https://i.ibb.co/HTGNY3gj/trello-clone-signup.png)
-- User registration with Clerk
-
-![Dashboard](https://i.ibb.co/d03BSbpJ/trello-clone-dashboard.png)
-- User dashboard with board overview and statistics
-
-![Filters](https://i.ibb.co/5gk56gKV/trello-clone-dropdown.png)
-- Filter Dropdown on Dashboard Page
-
-![Board](https://i.ibb.co/sJK02cFR/trello-clone-edit-board.png)
-- Interactive kanban board with drag-and-drop functionality
-
-![Pricing](https://i.ibb.co/ZpRsPFRL/trello-clone-pricing.png)
-- Subscription plans and pricing options
-
-## Run Locally
-
-Clone the project
-
-```bash
-git clone https://github.com/Mshandev/Trello-Clone.git
+```
+Taskora/
+├── app/                    # Next.js App Router pages
+│   ├── /                   # Landing page
+│   ├── /dashboard          # Board overview + stats
+│   ├── /boards/[id]        # Kanban board view
+│   ├── /pricing            # Subscription plans
+│   ├── /sign-in            # Clerk auth
+│   └── /sign-up            # Clerk auth
+├── features/               # Feature-based modules
+│   ├── auth/               # Login & signup components
+│   └── dashboard/          # Dashboard & board components
+├── components/             # Shared UI components
+├── lib/
+│   ├── services.ts         # Supabase data layer (boards, columns, tasks)
+│   └── supabase/           # Supabase client & models
+└── providers/
+    └── SupabaseProvider.tsx  # Clerk-authenticated Supabase client
 ```
 
-Go to the project directory
+### Auth + Database Flow
 
-```bash
-cd trello-clone
+```
+User (Clerk Auth)
+        ↓
+  Clerk JWT Token
+        ↓
+  SupabaseProvider
+  (accessToken: Clerk JWT)
+        ↓
+  Supabase PostgreSQL
+  (Row Level Security)
 ```
 
-Install dependencies
+Clerk JWTs are passed directly to Supabase via the `accessToken` option — enabling row-level security policies to enforce per-user data isolation without a separate backend.
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+
+| Library | Purpose |
+|---------|---------|
+| Next.js 15 + TypeScript | Full-stack React framework with App Router |
+| **@dnd-kit** | Drag-and-drop Kanban board interactions |
+| Shadcn UI + Radix UI | Accessible, headless UI components |
+| Tailwind CSS | Utility-first styling |
+| Lucide React | Icon library |
+
+### Backend & Infrastructure
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
+![Clerk](https://img.shields.io/badge/Clerk-6C47FF?style=for-the-badge&logo=clerk&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+
+| Technology | Purpose |
+|------------|---------|
+| **Supabase** | PostgreSQL database + Row Level Security |
+| **Clerk** | Authentication, user management & JWT |
+| Vercel | Deployment & hosting |
+
+---
+
+## 🗄️ Database Schema
+
+```sql
+boards (id, title, description, color, user_id, created_at, updated_at)
+columns (id, board_id, title, sort_order, user_id, created_at)
+tasks (id, column_id, title, description, assignee, due_date, priority, sort_order, created_at, updated_at)
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- [Supabase](https://supabase.com) account
+- [Clerk](https://clerk.com) account
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/mbilalhussain15/Taskora-Project-Management-Platform.git
+cd Taskora-Project-Management-Platform
+
+# Install dependencies
 npm install
 ```
 
-Setup Environment Variables
+### Environment Variables
 
-Create a `.env` file in the root folder and add the following variables:
+Create a `.env.local` file in the root:
 
 ```env
-# Clerk Authentication
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
 CLERK_SECRET_KEY=your_clerk_secret_key
-
-# Supabase Database
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
-Start the development server
+### Supabase Setup
+
+Run the following SQL in your Supabase SQL Editor:
+
+```sql
+CREATE TABLE boards (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  title TEXT NOT NULL,
+  description TEXT,
+  color TEXT NOT NULL DEFAULT '#3B82F6',
+  user_id TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE columns (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  board_id UUID REFERENCES boards(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  sort_order INTEGER NOT NULL DEFAULT 0,
+  user_id TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE tasks (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  column_id UUID REFERENCES columns(id) ON DELETE CASCADE,
+  title TEXT NOT NULL,
+  description TEXT,
+  assignee TEXT,
+  due_date DATE,
+  priority TEXT CHECK (priority IN ('low', 'medium', 'high')) DEFAULT 'medium',
+  sort_order INTEGER NOT NULL DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+### Clerk JWT Template
+
+In Clerk Dashboard → Configure → JWT Templates → New Template → select **Supabase** → paste your Supabase JWT secret as the signing key.
+
+### Run Locally
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000)
 
-## Tech Stack
+---
 
-### Frontend
-- **[Next.js 15](https://nextjs.org/)** - React framework with App Router
-- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
-- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
-- **[Shadcn UI](https://ui.shadcn.com/)** - Beautiful, accessible components
-- **[Lucide React](https://lucide.dev/)** - Icon library
+## 📄 License
 
-### Backend & Database
-- **[Supabase](https://supabase.com/)** - Backend-as-a-Service with PostgreSQL
-- **[Clerk](https://clerk.com/)** - Authentication and user management
-
-### Drag & Drop
-- **[@dnd-kit](https://dndkit.com/)** - Modern drag-and-drop toolkit for React
-
-### Development Tools
-- **[ESLint](https://eslint.org/)** - Code linting
-- **[PostCSS](https://postcss.org/)** - CSS processing
-
-## Deployment
-
-The application is deployed on Vercel.
-
-## Contributing
-
-Contributions are always welcome!
-Just raise an issue, and we will discuss it.
-
-## Feedback
-
-If you have any feedback, please reach out to me [here](https://www.linkedin.com/in/muhammad-shan-full-stack-developer/)
+MIT © [Bilal Hussain](https://github.com/mbilalhussain15)
