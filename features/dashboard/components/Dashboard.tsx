@@ -30,7 +30,7 @@ export default function Dashboard() {
     },
   });
 
-  const canCreateBoard = !isFreeUser || boards.length < 1;
+  const canCreateBoard = true;
 
   function clearFilters() {
     setFilters({
